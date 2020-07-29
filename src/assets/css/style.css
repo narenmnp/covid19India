@@ -47,32 +47,6 @@ body {
     animation: fadeIn 3s 1 linear;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes ScaleIn {
-    0% {
-        opacity: 0;
-        transform: scale(.1);
-    }
-
-    85% {
-        opacity: 1;
-        transform: scale(1.05);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
 .counter-circle>.counter-title {
     font-size: 0.45em !important;
     font-weight: 900;
@@ -115,6 +89,7 @@ table>tbody>tr:nth-child(even) {
     background-color: rgba(227, 227, 227, 0.10);
 }
 
+
 table>tbody>tr>td {
     max-width: 5em;
 }
@@ -134,4 +109,32 @@ table>tbody>tr>td {
 
 .updated-time {
     font-size: 0.6em;
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes ScaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(.1);
+    }
+
+    85% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
