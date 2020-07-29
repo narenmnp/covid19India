@@ -1,0 +1,137 @@
+:root {
+    --primary-background: #17213b;
+    --primary-font: 'Open Sans Condensed', sans-serif;
+    --primary-font-color: antiquewhite;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    position: fixed;
+    background-color: var(--primary-background);
+    height: 100vh;
+    width: 100vw;
+    font-family: var(--primary-font);
+    overflow-y: scroll;
+}
+
+.container {
+    margin: 0 4em 5em 4em;
+}
+
+.r0w {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.r0w-center {
+    justify-content: center;
+}
+
+.counter-circle {
+    box-shadow: 4px 3px 33px -12px rgba(255, 255, 255, 1);
+    /* font-family: var(--secondary-font); */
+    color: var(--primary-font-color);
+    font-size: 3.0em;
+    border: 0.001em solid var(--primary-font-color);
+    border-radius: 50%;
+    padding: 0.9em;
+    margin: 0.5em 0.3em 1em 0.3em;
+    height: 2em;
+    width: 2em;
+    text-align: center;
+    line-height: 0.5em;
+    animation: fadeIn 3s 1 linear;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes ScaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(.1);
+    }
+
+    85% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.counter-circle>.counter-title {
+    font-size: 0.45em !important;
+    font-weight: 900;
+}
+
+.counter-circle>.counter-number {
+    line-height: inherit;
+    font-size: 0.8em !important;
+}
+
+.header {
+    color: var(--primary-font-color);
+    font-size: 2.5em;
+    line-height: 3em;
+}
+
+table {
+    width: 100%;
+    color: var(--primary-font-color);
+    margin: 2em auto;
+    border: none;
+    animation: ScaleIn 2s 1 forwards;
+}
+
+table>thead {
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: 800;
+    background-color: darkgrey;
+    line-height: 2em;
+    color: black;
+}
+
+table>tbody {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+table>tbody>tr:nth-child(even) {
+    background-color: rgba(227, 227, 227, 0.10);
+}
+
+table>tbody>tr>td {
+    max-width: 5em;
+}
+
+.sub-text {
+    font-size: 0.6em !important;
+    font-weight: 900;
+}
+
+.sub-text::before {
+    content: "   ( ";
+}
+
+.sub-text::after {
+    content: " )";
+}
+
+.updated-time {
+    font-size: 0.6em;
+}
