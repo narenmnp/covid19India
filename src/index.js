@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import configureStore from './configureStore';
 import { Provider } from 'react-redux';
 import JavascriptTimeAgo from 'javascript-time-ago'
+import './assets/fontawesome/css/all.css'
 
 import en from 'javascript-time-ago/locale/en'
 

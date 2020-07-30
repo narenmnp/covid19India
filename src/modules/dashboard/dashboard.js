@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Header from './header';
 import Table from './table';
 import { getCumulativeCovid19Data } from './action';
+import { formatNumberWithCommas } from '../../assets/js/common';
 const $ = require('jquery')
 const jQuery = require('jquery')
 
@@ -21,7 +22,7 @@ class Dashboard extends React.Component {
                 step: function () {
                     $this.text(Math.ceil(this.Counter));
                 }
-            });
+            })
         });
     }
 
@@ -37,6 +38,7 @@ class Dashboard extends React.Component {
                     <div className="counter-circle">
                         <p className="counter-title">Confirmed</p>
                         <div className="counter-number counter">{countryData.confirmed}</div>
+                        {/* <div className="counter-number counter">{countryData.confirmed}</div> */}
                         {/* <div className="sub-text">300</div> */}
                     </div>
                     <div className="counter-circle">

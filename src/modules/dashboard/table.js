@@ -1,17 +1,22 @@
 import React from 'react';
 import ReactTimeAgo from 'react-time-ago'
+import { ascendingSort, descendingSort } from '../../assets/js/common';
+import { ICON_SORT_ASCENDING, ICON_SORT_DESCENDING } from '../../assets/js/icons';
 
 class Table extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: this.props.data,
-            orderColumnName: "confirmed",
-            orderType: "A"
+            sortColumn: "",
+            ascending: true
         }
+
         this.renderTableContent = this.renderTableContent.bind(this);
         this.renderRow = this.renderRow.bind(this);
         this.formatServerDate = this.formatServerDate.bind(this);
+        this.sort = this.sort.bind(this);
+        this.renderSortIcon = this.renderSortIcon.bind(this);
     }
 
     renderTableContent(data) {
@@ -49,6 +54,49 @@ class Table extends React.Component {
         return null;
     }
 
+    sort(columnName) {
+        var _ascending = this.state.ascending;
+        var _sortColumn = this.state.sortColumn;
+        if (_sortColumn === columnName) {
+            _ascending = !_ascending;
+        } else {
+            _ascending = true;
+            _sortColumn = columnName;
+        }
+
+        this.setState({
+            sortColumn: _sortColumn,
+            ascending: _ascending
+        })
+
+        var sortedData = this.state.data;
+        if (_ascending) {
+            sortedData = ascendingSort(this.state.data, _sortColumn);
+        } else {
+            sortedData = descendingSort(this.state.data, _sortColumn);
+        }
+
+        this.setState({
+            data: sortedData
+        })
+    }
+
+    renderSortIcon(columnName) {
+        if (columnName) {
+            if (this.state.sortColumn === columnName) {
+                if (this.state.ascending) {
+                    return ICON_SORT_DESCENDING;
+                } else {
+                    return ICON_SORT_ASCENDING;
+                }
+            }
+
+            return null;
+        }
+
+        return null;
+    }
+
     render() {
 
         if (!this.state.data)
@@ -59,10 +107,10 @@ class Table extends React.Component {
                 <table>
                     <thead>
                         <td>State</td>
-                        <td>Confirmed</td>
-                        <td>Active</td>
-                        <td>Recovered</td>
-                        <td>Deaths</td>
+                        <td><span className="pointer" onClick={() => this.sort("confirmed")}>Confirmed {this.renderSortIcon("confirmed")}</span></td>
+                        <td><span className="pointer" onClick={() => this.sort("active")}>Active {this.renderSortIcon("active")}</span></td>
+                        <td><span className="pointer" onClick={() => this.sort("recovered")}>Recovered {this.renderSortIcon("recovered")}</span></td>
+                        <td><span className="pointer" onClick={() => this.sort("deaths")}>Deaths {this.renderSortIcon("deaths")}</span></td>
                     </thead>
                     <tbody>
                         {this.renderTableContent(this.state.data)}
@@ -75,6 +123,8 @@ class Table extends React.Component {
     componentWillReceiveProps(newProps) {
         this.setState({
             data: newProps.data
+        }, () => {
+            this.sort("confirmed")
         })
     }
 }
