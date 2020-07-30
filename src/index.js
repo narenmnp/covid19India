@@ -7,6 +7,11 @@ import Home from './modules/home/home'
 import * as serviceWorker from './serviceWorker';
 import configureStore from './configureStore';
 import { Provider } from 'react-redux';
+import JavascriptTimeAgo from 'javascript-time-ago'
+
+import en from 'javascript-time-ago/locale/en'
+
+JavascriptTimeAgo.addLocale(en)
 
 export const store = configureStore;
 ReactDOM.render(

@@ -1,10 +1,17 @@
 import React from 'react';
+import ReactTimeAgo from 'react-time-ago'
 
 class Table extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            data: this.props.data,
+            orderColumnName: "confirmed",
+            orderType: "A"
+        }
         this.renderTableContent = this.renderTableContent.bind(this);
         this.renderRow = this.renderRow.bind(this);
+        this.formatServerDate = this.formatServerDate.bind(this);
     }
 
     renderTableContent(data) {
@@ -22,7 +29,8 @@ class Table extends React.Component {
             <tr key={rowIndex}>
                 <td>
                     <div>{stateData.state}</div>
-                    <div className="updated-time">{stateData.lastupdatedtime}</div>
+                    <div className="updated-time"><ReactTimeAgo date={this.formatServerDate(stateData.lastupdatedtime)} /></div>
+                    {/* <div className="updated-time">{stateData.lastupdatedtime}</div> */}
                 </td>
                 <td>{stateData.confirmed} <span className="sub-text">{stateData.deltaconfirmed}</span></td>
                 <td>{stateData.active}</td>
@@ -32,9 +40,18 @@ class Table extends React.Component {
         )
     }
 
+    formatServerDate(serverDate) {
+        if (serverDate) {
+            var dateArray = serverDate.split("/");
+            return new Date(dateArray[1] + "/" + dateArray[0] + "/" + dateArray[2]);
+        }
+
+        return null;
+    }
+
     render() {
 
-        if (!this.props.data)
+        if (!this.state.data)
             return null;
 
         return (
@@ -48,11 +65,17 @@ class Table extends React.Component {
                         <td>Deaths</td>
                     </thead>
                     <tbody>
-                        {this.renderTableContent(this.props.data)}
+                        {this.renderTableContent(this.state.data)}
                     </tbody>
                 </table>
             </div>
         )
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setState({
+            data: newProps.data
+        })
     }
 }
 
