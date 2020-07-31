@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactTimeAgo from 'react-time-ago'
-import { ascendingSort, descendingSort } from '../../assets/js/common';
+import { ascendingSort, descendingSort, formatNumberWithCommas } from '../../assets/js/common';
 import { ICON_SORT_ASCENDING, ICON_SORT_DESCENDING } from '../../assets/js/icons';
 
 class Table extends React.Component {
@@ -37,10 +37,10 @@ class Table extends React.Component {
                     <div className="updated-time"><ReactTimeAgo date={this.formatServerDate(stateData.lastupdatedtime)} /></div>
                     {/* <div className="updated-time">{stateData.lastupdatedtime}</div> */}
                 </td>
-                <td>{stateData.confirmed} <span className="sub-text">{stateData.deltaconfirmed}</span></td>
-                <td>{stateData.active}</td>
-                <td>{stateData.recovered}<span className="sub-text">{stateData.deltarecovered}</span></td>
-                <td>{stateData.deaths}<span className="sub-text">{stateData.deltadeaths}</span></td>
+                <td>{formatNumberWithCommas(stateData.confirmed)} <span className="sub-text">{stateData.deltaconfirmed}</span></td>
+                <td>{formatNumberWithCommas(stateData.active)}</td>
+                <td>{formatNumberWithCommas(stateData.recovered)}<span className="sub-text">{stateData.deltarecovered}</span></td>
+                <td>{formatNumberWithCommas(stateData.deaths)}<span className="sub-text">{stateData.deltadeaths}</span></td>
             </tr>
         )
     }
